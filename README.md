@@ -1,88 +1,52 @@
-data-uri-to-buffer
-==================
-### Generate a Buffer instance from a [Data URI][rfc] string
-[![Build Status](https://travis-ci.org/TooTallNate/node-data-uri-to-buffer.svg?branch=master)](https://travis-ci.org/TooTallNate/node-data-uri-to-buffer)
+# @esm2cjs/data-uri-to-buffer
 
-This module accepts a ["data" URI][rfc] String of data, and returns a
-node.js `Buffer` instance with the decoded data.
+This is a fork of https://github.com/TooTallNate/node-data-uri-to-buffer, but automatically patched to support ESM **and** CommonJS, unlike the original repository.
 
+## Install
 
-Installation
-------------
+You can use an npm alias to install this package under the original name:
 
-Install with `npm`:
-
-``` bash
-$ npm install data-uri-to-buffer
+```
+npm i data-uri-to-buffer@npm:@esm2cjs/data-uri-to-buffer
 ```
 
-
-Example
--------
-
-``` js
-var dataUriToBuffer = require('data-uri-to-buffer');
-
-// plain-text data is supported
-var uri = 'data:,Hello%2C%20World!';
-var decoded = dataUriToBuffer(uri);
-console.log(decoded.toString());
-// 'Hello, World!'
-
-// base64-encoded data is supported
-uri = 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ%3D%3D';
-decoded = dataUriToBuffer(uri);
-console.log(decoded.toString());
-// 'Hello, World!'
+```jsonc
+// package.json
+"dependencies": {
+    "data-uri-to-buffer": "npm:@esm2cjs/data-uri-to-buffer"
+}
 ```
 
+but `npm` might dedupe this incorrectly when other packages depend on the replaced package. If you can, prefer using the scoped package directly:
 
-API
----
+```
+npm i @esm2cjs/data-uri-to-buffer
+```
 
-### dataUriToBuffer(String uri) → Buffer
+```jsonc
+// package.json
+"dependencies": {
+    "@esm2cjs/data-uri-to-buffer": "^ver.si.on"
+}
+```
 
-The `type` property on the Buffer instance gets set to the main type portion of
-the "mediatype" portion of the "data" URI, or defaults to `"text/plain"` if not
-specified.
+## Usage
 
-The `typeFull` property on the Buffer instance gets set to the entire
-"mediatype" portion of the "data" URI (including all parameters), or defaults
-to `"text/plain;charset=US-ASCII"` if not specified.
+```js
+// Using ESM import syntax
+import dataUriToBuffer from "@esm2cjs/data-uri-to-buffer";
 
-The `charset` property on the Buffer instance gets set to the Charset portion of
-the "mediatype" portion of the "data" URI, or defaults to `"US-ASCII"` if the
-entire type is not specified, or defaults to `""` otherwise.
+// Using CommonJS require()
+const dataUriToBuffer = require("@esm2cjs/data-uri-to-buffer").default;
+```
 
-*Note*: If the only the main type is specified but not the charset, e.g.
-`"data:text/plain,abc"`, the charset is set to the empty string. The spec only
-defaults to US-ASCII as charset if the entire type is not specified.
+> **Note:**
+> Because the original module uses `export default`, you need to append `.default` to the `require()` call.
 
+For more details, please see the original [repository](https://github.com/TooTallNate/node-data-uri-to-buffer).
 
-License
--------
+## Sponsoring
 
-(The MIT License)
+To support my efforts in maintaining the ESM/CommonJS hybrid, please sponsor [here](https://github.com/sponsors/AlCalzone).
 
-Copyright (c) 2014 Nathan Rajlich &lt;nathan@tootallnate.net&gt;
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-[rfc]: http://tools.ietf.org/html/rfc2397
+To support the original author of the module, please sponsor [here](https://github.com/TooTallNate/node-data-uri-to-buffer).
